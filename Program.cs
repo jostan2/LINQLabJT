@@ -1,9 +1,12 @@
-﻿namespace LINQLabJT
+﻿using System.Linq;
+
+namespace LINQLabJT
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("For nums:");
             int[] nums = { 10, 2330, 112233, 10, 949, 3764, 2942 };
 
             int minimumNums = nums.Min(); //Find minimum value in list
@@ -34,13 +37,77 @@
             Console.WriteLine();
 
             //order numbers from greatest to least (in decending order, from greatest to least)
-                //Array.Sort(nums); //will give ascending order
+            //Array.Sort(nums); //will give ascending order
             nums = nums.OrderByDescending(n => n).ToArray();
             Console.WriteLine();
-            foreach(int num in nums)
+            foreach (int num in nums)
             {
                 Console.WriteLine(num);
             }
+
+
+            Console.WriteLine();
+            Console.WriteLine("----------------------------------------");
+            Console.WriteLine();
+
+
+            Console.WriteLine("For Students:");
+            Console.WriteLine();
+
+            List<Student> students = new List<Student>(); //creating new list using Student.cs and below values.
+            students.Add(new Student("Jimmy", 13));
+            students.Add(new Student("Hannah Banana", 21));
+            students.Add(new Student("Justin", 30));
+            students.Add(new Student("Sarah", 53));
+            students.Add(new Student("Hannibal", 15));
+            students.Add(new Student("Phillip", 16));
+            students.Add(new Student("Maria", 63));
+            students.Add(new Student("Abe", 33));
+            students.Add(new Student("Curtis", 10));
+
+            List<Student> drinkingAge = students.Where(s => s.Age > 20).ToList();
+            Console.WriteLine("Students who are 21 years old and above:");
+            printStudents(drinkingAge);
+            Console.WriteLine();
+
+            int oldestAge = students.Max(s => s.Age); //Find oldest student
+            Student oldestName = students.Where(s => s.Age == oldestAge).First();
+            Console.WriteLine($"The student with the oldest age: {oldestName.Name}, {oldestAge}");
+            Console.WriteLine();
+
+            int youngestAge = students.Min(s => s.Age); //Find youngest student
+            Student youngestName = students.Where(s => s.Age == youngestAge).First();
+            Console.WriteLine($"The student with the oldest age: {youngestName.Name}, {youngestAge}");
+            Console.WriteLine();
+
+            List<Student> underTF = students.Where(s => s.Age < 25).ToList(); //Finding oldest student <25 yr
+            int underTFOldest = underTF.Max(s => s.Age);
+            Student oldUnderTF = students.Where(s => s.Age == underTFOldest).First();
+            Console.WriteLine($"The oldest student under 25 is {oldUnderTF.Name}, {oldUnderTF.Age}");
+            Console.WriteLine();
+
+            List<Student> ageEven = students.Where(s => s.Age % 2 == 0).ToList(); //everybody with even number
+            List<Student> overTOEven = ageEven.Where(s => s.Age > 21).ToList();
+            Console.WriteLine($"The students who are over 21 and have even ages are:");
+            printStudents(overTOEven);
+            Console.WriteLine();
+
+            List<Student> teenAge = students.Where(s => s.Age > 12 && s.Age < 20).ToList(); //find all students ages 13-19
+            Console.WriteLine($"The students who are teenagers (ages 13-19) are:");
+            printStudents(teenAge);
+            Console.WriteLine();
+
+            //7) vowel -- see piglatin vowel list.
+
+            List<Student>
+            List<Student> vowelStudents = students.OrderBy(s => s.Name).ToList();
+            Console.WriteLine();
+
+            List<Student> sort = students.OrderBy(s => s.Age).ToList(); //list students by ages in ascending order.
+            Console.WriteLine("The students sorted by age in ascending order are:");
+            printStudents(sort);
+            Console.WriteLine();
+
         }
 
         public static void PrintList(List<int> input) //function to print list
@@ -52,13 +119,22 @@
             }
         }
 
-        public static void PrintListString(List<string> input) //function to print list
+        public static void printStudents(List<Student> students)
         {
-            for (int i = 0; i < input.Count; i++)
+            for (int i = 0; i < students.Count; i++)
             {
-                string s = input[i];
-                Console.WriteLine($"{i}: {s}");
+                Student s = students[i];
+                Console.WriteLine($" {s.Name}, {s.Age}");
             }
+        }
+
+        public static bool IsVowel(char c)
+        {
+            char[] vowels = { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' };
+
+            bool isVowel = vowels.Contains(c);
+
+            return isVowel;
         }
     }
 }
