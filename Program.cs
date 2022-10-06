@@ -34,8 +34,15 @@
             Console.WriteLine();
 
 
+            //order numbers from greatest to least (in decending order, from greatest to least)
+            //Array.Sort(nums); //will give ascending order
 
-
+            nums = nums.OrderByDescending(n => n).ToArray();
+            Console.WriteLine();
+            foreach(int num in nums)
+            {
+                Console.WriteLine(num);
+            }
         }
 
         public static void PrintList(List<int> input) //function to print list
