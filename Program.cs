@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics.Tracing;
+using System.Linq;
 
 namespace LINQLabJT
 {
@@ -88,19 +89,23 @@ namespace LINQLabJT
 
             List<Student> ageEven = students.Where(s => s.Age % 2 == 0).ToList(); //everybody with even number
             List<Student> overTOEven = ageEven.Where(s => s.Age > 21).ToList();
-            Console.WriteLine($"The students who are over 21 and have even ages are:");
+            Console.WriteLine("The students who are over 21 and have even ages are:");
             printStudents(overTOEven);
             Console.WriteLine();
 
             List<Student> teenAge = students.Where(s => s.Age > 12 && s.Age < 20).ToList(); //find all students ages 13-19
-            Console.WriteLine($"The students who are teenagers (ages 13-19) are:");
+            Console.WriteLine("The students who are teenagers (ages 13-19) are:");
             printStudents(teenAge);
             Console.WriteLine();
 
-            //7) vowel -- see piglatin vowel list.
+            //7) vowel -- see piglatin vowel list
+            char[] vowels = { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' };
 
-            List<Student>
-            List<Student> vowelStudents = students.OrderBy(s => s.Name).ToList();
+            IEnumerable<Student> vowelNames = students.Where(s => s.Name[0] == 'a' || s.Name[0] == 'e' || s.Name[0] == 'i' || s.Name[0] == 'o' || s.Name[0] == 'u' || s.Name[0] == 'A' || s.Name[0] == 'E' || s.Name[0] == 'I' || s.Name[0] == 'O' || s.Name[0] == 'U');
+            List<Student> vowelStudents = vowelNames.OrderBy(s => s.Name).ToList();
+
+            Console.WriteLine("The students' names listed by vowel are:");
+            printStudents(vowelStudents);
             Console.WriteLine();
 
             List<Student> sort = students.OrderBy(s => s.Age).ToList(); //list students by ages in ascending order.
@@ -126,15 +131,6 @@ namespace LINQLabJT
                 Student s = students[i];
                 Console.WriteLine($" {s.Name}, {s.Age}");
             }
-        }
-
-        public static bool IsVowel(char c)
-        {
-            char[] vowels = { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' };
-
-            bool isVowel = vowels.Contains(c);
-
-            return isVowel;
         }
     }
 }
