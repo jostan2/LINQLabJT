@@ -18,17 +18,17 @@
             Console.WriteLine("The maximum value that is less than 10,000 is: {0}", maxThanNums);
             Console.WriteLine();
 
-            List<int> betweenNums = nums.Where(num => num > 10 && num < 100).ToList();
+            List<int> betweenNums = nums.Where(num => num > 10 && num < 100).ToList(); // 10 < values < 100
             Console.WriteLine("The numbers inbetween 10 and 100 are:");
             PrintList(betweenNums); //should be none?
             Console.WriteLine();
 
-            List<int> inclusiveNums = nums.Where(num => num > 10000 && num < 999999).ToList();
+            List<int> inclusiveNums = nums.Where(num => num >= 10000 && num <= 999999).ToList(); // 1000 <= values <= 999999 (inclusive)
             Console.WriteLine("The numbers inbetween 10000 and 999999 are:");
             PrintList(inclusiveNums);
             Console.WriteLine();
 
-            List<int> evenNums = nums.Where(num => num % 2 == 0).ToList();
+            List<int> evenNums = nums.Where(num => num % 2 == 0).ToList(); //all even numbers
             Console.WriteLine("The even values are:");
             PrintList(evenNums);
             Console.WriteLine();
