@@ -33,10 +33,8 @@
             PrintList(evenNums);
             Console.WriteLine();
 
-
             //order numbers from greatest to least (in decending order, from greatest to least)
-            //Array.Sort(nums); //will give ascending order
-
+                //Array.Sort(nums); //will give ascending order
             nums = nums.OrderByDescending(n => n).ToArray();
             Console.WriteLine();
             foreach(int num in nums)
